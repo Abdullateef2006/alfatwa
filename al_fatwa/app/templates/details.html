@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+
+
+{% block title %}
+{{lecture.title}}
+
+{% endblock title %}
+
+
+
+{% block content %}
+<style>
+    .episode_title {
+        padding: 30px 30px;
+    }
+
+    
+
+
+ 
+    .semi_episode {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+ 
+
+
+    }
+
+    .quater_episode {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .Episode_img {
+        width: 16rem;
+        height: 152px;
+    }
+
+    .Episode_img img {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+
+    }
+
+    .text_listen button {
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 20px;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        width: 100px;
+    }
+
+    @media only screen and (max-width: 900px) {
+        .semi_episode {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .episode {
+            padding: 40px 19% 40px 19%;
+
+
+        }
+
+        .text_listen button {
+            margin-top: 20px;
+        }
+
+    
+    }
+</style>
+
+
+
+
+<div class="first_body">
+    <!-- <div class="bod">
+        <h1>Welcome to Islamic Teachings</h1>
+        <p> Grow in your faith with teachings from top Muslim scholars. Explore our library of thousands of
+            lessons and Q&amp;A episodes
+        </p>
+
+        <div class="inp">
+            <button id="search">                    <i class="fa-solid fa-magnifying-glass fa-2xl" style="color: #000000;"></i>
+            </button>
+            <input type="text" id="q" placeholder="search for a lecture">
+            <button id="sub">Submit</button>
+        </div>
+
+    </div> -->
+    <div class="episode_title">
+        <h2 style="text-align: center;">{{lecture.title}}</h2>
+        <h3 style="text-align: center;">{{lecture.description}}</h3>
+
+
+    </div>
+
+    <div class="episode">
+        <h1>Episodes</h1>
+        {% for episodes in episodes %}
+
+        <div class="semi_episode">
+            <div class="quater_episode">
+                <div class="text_mini">
+                    <p style="color:#4CAF50 ;">{{episodes.lecture.title}}</p>
+                    <h3>{{episodes.title}}</h3>
+    
+                </div>
+                <!-- <div class="text_listen">
+                    <button> <a  style="color: black;" href="{% url 'episode' episodes.id %}">listen now</a></button>
+    
+                </div>
+              -->
+            </div>
+            <div class="text_listen">
+                <button> <a  style="color: black;" href="{% url 'episode' episodes.id %}">listen now</a></button>
+
+            </div>
+         
+            <!-- <div class="Episode_img">
+                <img src="{% static 'img/bc807b5d-dd43-453a-891c-189497072254.png' %}" alt="">
+    
+            </div> -->
+
+        </div>
+
+        <hr style="margin-top: 20px;">
+        {% endfor %}
+        
+    
+    </div>
+
+</div>
+
+
+{% endblock content %}

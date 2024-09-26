@@ -1,0 +1,233 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Lecture list
+{% endblock title %}
+
+{% block content %}
+<style>
+    .navbar {
+        display: flex;
+        padding: 20px 20px 20px 20px;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #e8f3e8;
+    }
+
+    .nav-left ul {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+
+    }
+
+
+
+    .whole_body {
+        padding: 40px 19% 40px 19%;
+    }
+
+    .first_body {
+        padding: 40px 19% 40px 19%;
+    }
+
+
+
+
+
+
+    
+
+    .inp {
+        display: flex;
+        gap: 20px;
+        position: relative;
+        background-color: white;
+        width: 40%;
+        height: 60px;
+        border-radius: 20px;
+        align-items: center;
+    }
+
+    #q {
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        border: none;
+        padding-left: 60px;
+        font-size: large;
+    }
+
+    #search {
+        position: absolute;
+        margin-left: 20px;
+        background-color: transparent;
+        border: none;
+    }
+
+    #news {
+        margin-top: 30px;
+
+    }
+
+    .logo {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+
+
+
+    .whole_img {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+        margin-top: 30px;
+    }
+
+    #scorlar {
+        margin-top: 20px;
+    }
+
+    #scorlar {
+        border: 1px solid #e8f3e8;
+        border-radius: 8px;
+        padding: 15px;
+
+    }
+
+
+    .inner_scorlar {
+        display: flex;
+        gap: 70px;
+        align-items: center;
+        margin-top: 30px;
+
+    }
+
+    #btn_scorlar button {
+        background-color: #4CAF50;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        border-radius: 10px;
+        border: none;
+        width: 140px;
+    }
+
+
+    .imgs {
+        display: flex;
+        width: 280px;
+        height: 320px;
+        flex-direction: column;
+
+    }
+
+    .imgs img {
+        width: 100%;
+        height: 100%;
+        border-radius: 7px;
+    }
+
+    .txt {
+        margin-top: 30px;
+    }
+
+    #sub {
+        margin-right: 20px;
+        border: none;
+        background-color: #4CAF50;
+        border-radius: 20px;
+        padding: 10px;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+    }
+
+    @media only screen and (max-width: 900px) {
+        .first_body {
+            padding: 0;
+        }
+
+        .bod {
+            border-radius: 0;
+        }
+
+        .inner_scorlar {
+            flex-direction: column;
+            gap: 20px;
+            align-items: normal;
+        }
+
+        .inp {
+            width: 100%;
+        }
+
+        #q {
+            font-size: small;
+        }
+
+        #news {
+            margin-top: 30px;
+            padding: 40px 19% 40px 19%;
+    
+        }
+
+    }
+</style>
+
+
+<div class="first_body">
+    <div class="bod">
+        <h1 style="text-align: center;"> Ask questions and get answers from our community of Islamic scholars
+            and teachers</h1>
+
+
+        <!-- <div class="inp">
+            <button id="search"> <i class="fa-solid fa-magnifying-glass fa-2xl" style="color: #000000;"></i>
+            </button>
+            <input type="text" id="q" placeholder="search for a lecture">
+            <button id="sub">Submit</button>
+        </div> -->
+
+    </div>
+    <div id="news">
+        <h2>Courses</h2>
+        <div class="whole_img">
+            {% for lectures in lecture %}
+
+            <div class="imgs">
+                <img src="{{lectures.img.url}}" alt="" >
+                <div id="txt">
+                    <p ><a style="color: #509550;" href="{% url 'details' lectures.id %}">{{lectures.title}}</a>
+                    </p>
+                    <p >{{lectures.description}}</p>
+
+                </div>
+
+            </div>
+            {% endfor %}
+
+          
+       
+         
+
+        </div>
+
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+{% include "paginator.html" with page=lecture %}
+
+
+{% endblock content %}
