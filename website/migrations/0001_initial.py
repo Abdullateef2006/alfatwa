@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ('video', models.FileField(blank=True, null=True, upload_to='video')),
                 ('audio', models.FileField(blank=True, null=True, upload_to='audio')),
                 ('title', models.CharField(max_length=150)),
-                ('lecture', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.lecture')),
+                ('lecture', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='website.lecture')),
             ],
         ),
         migrations.CreateModel(
@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('question', models.CharField(max_length=150)),
-                ('episode', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.episodes')),
+                ('episode', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='website.episodes')),
             ],
         ),
     ]
