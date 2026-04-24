@@ -27,6 +27,10 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['alfatwa.pxxl.click', 'localhost', '127.0.0.1']
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://alfatwa.pxxl.click',
+]
+
 
 
 # Application definition
