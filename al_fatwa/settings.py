@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app',
+    'website',
     'rest_framework',
     'django_filters',
 ]
@@ -142,7 +142,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 import os
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS  =  os.path.join(BASE_DIR, 'app/static'),
+STATICFILES_DIRS  =  os.path.join(BASE_DIR, 'website/static'),
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STORAGES = {
     "staticfiles": {
