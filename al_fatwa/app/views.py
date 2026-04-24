@@ -7,8 +7,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import ModelViewSet
 from .serializers import *
-from django.shortcuts import render
-from django.shortcuts import get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -25,18 +24,19 @@ def lectures(request):
 
 def search(request):
     if request.method == 'POST':
-        query = request.POST["search"]
-        episode = Questions.objects.filter(
-            Q(details__contains=query) )
-        count = episode.count()
-        context =  {
+        query = request.POST.get("search", "")
+        lectures = Lecture.objects.filter(
+            Q(title__icontains=query) | Q(description__icontains=query)
+        )
+        count = lectures.count()
+        context = {
             'count': count,
             'query': query,
-            'episode': episode
+            'lectures': lectures
         }
         return render(request, 'home.html', context)
     else:
-        return render(request, 'home.html', context)
+        return render(request, 'home.html', {})
 
 
 def lecture_details(request, id):
@@ -52,6 +52,12 @@ def lecture_details(request, id):
 
 def episode_details(request, id):
     episode = get_object_or_404(Episodes, id=id)
+    if request.method == 'POST':
+        question_text = request.POST.get('question')
+        if question_text:
+            Questions.objects.create(details=question_text, episode=episode)
+            return redirect('episode', id=id)
+            
     question = Questions.objects.filter(episode=episode)
     return render(request, 'episodes.html', {'episodes': episode, 'question': question})
 

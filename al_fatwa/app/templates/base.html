@@ -1,277 +1,110 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore Al-Fatwa Islamic Teachings: A comprehensive library of lectures and Q&A episodes by Sheikh Dhikrullah Shafi'i to help you grow in faith and understanding.">
+    <meta name="keywords" content="Islamic teachings, Al-Fatwa, Sheikh Dhikrullah Shafi'i, Quran, Sunnah, Islamic lectures, Fatwa, Islamic education">
+    <meta name="author" content="Al-Fatwa Team">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:title" content="{% block og_title %}Al-Fatwa Islamic Teachings{% endblock %}">
+    <meta property="og:description" content="Grow in your faith with teachings from Sheikh Dhikrullah Shafi'i.">
+    <meta property="og:image" content="{% static 'img/bc807b5d-dd43-453a-891c-189497072254.png' %}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+    <meta property="twitter:title" content="{% block twitter_title %}Al-Fatwa Islamic Teachings{% endblock %}">
+    <meta property="twitter:description" content="Grow in your faith with teachings from Sheikh Dhikrullah Shafi'i.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Global CSS System -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    
+    <!-- Title Block -->
     <title>
-        {% block title %}
-
-        {% endblock title %}
+        {% block title %}Al-Fatwa Islamic Teachings{% endblock title %}
     </title>
-    <style>
-        * {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            text-decoration: none;
-        
-            box-sizing: border-box;
-        
-        /* 
-            font-family: "Playwrite DE Grund", cursive;
-            font-weight: 600; */
-        
-            font-family: "Bree Serif", serif;
-            font-weight: 400;
-        
-        }
-        
-        .navbar {
-            display: flex;
-            padding: 20px 20px 20px 20px;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #e8f3e8;
-        }
-        
-        .nav-left ul {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        
-        }
-        
-        
-        
-        .whole_body {
-            padding: 40px 19% 40px 19%;
-        }
-        
-        .first_body {
-            padding: 40px 19% 40px 19%;
-        }
-        
-        
-        
-        
-        
-        .bod {
-            padding: 25% 10% 6% 10%;
-            background: url("{% static 'img/bc807b5d-dd43-453a-891c-189497072254.png' %}") no-repeat;
-            color: white;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-size: 100% 100%;
-            display: flex;
-            flex-direction: column;
-        
-            gap: 30px;
-            border-radius: 20px;
-        
-        
-        
-        
-        }
-        
-        .inp {
-            display: flex;
-            gap: 20px;
-            position: relative;
-            background-color: white;
-            width: 40%;
-            height: 60px;
-            border-radius: 20px;
-            align-items: center;
-        }
-        
-        #q {
-            width: 100%;
-            height: 100%;
-            border-radius: 20px;
-            border: none;
-            padding-left: 60px;
-            font-size: large;
-        }
-        
-        #search {
-            position: absolute;
-            margin-left: 20px;
-            background-color: transparent;
-            border: none;
-        }
-        
-        #news {
-            margin-top: 30px;
-        }
-        
-        .logo {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-        
-        .img img {
-            width: 280px;
-            border-radius: 20px;
-        }
-        
-        .whole_img {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-        
-        #scorlar {
-            margin-top: 20px;
-        }
-        
-        #scorlar {
-            border: 1px solid #e8f3e8;
-            border-radius: 8px;
-            padding: 15px;
-        
-        }
-        
-        
-        .inner_scorlar {
-            display: flex;
-            gap: 70px;
-            align-items: center;
-            margin-top: 30px;
-        
-        }
-        
-        #btn_scorlar button {
-            background-color: #4CAF50;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-            border-radius: 10px;
-            border: none;
-            width: 140px;
-        }
-        
-        
-        .imgs {
-            display: flex;
-            width: 280px;
-            flex-direction: column;
-        
-        }
-        
-        .imgs img {
-            width: 100%;
-            border-radius: 7px;
-        }
-        
-        .txt {
-            margin-top: 30px;
-        }
-        
-        #sub {
-            margin-right: 20px;
-            border: none;
-            background-color: #4CAF50;
-            border-radius: 20px;
-            padding: 10px;
-            align-items: center;
-            justify-content: center;
-            width: 100px;
-        }
-        
-        @media only screen and (max-width: 900px) {
-            .first_body {
-                padding: 0;
-            }
-        
-            .bod {
-                border-radius: 0;
-            }
-        
-            .inner_scorlar {
-                flex-direction: column;
-                gap: 20px;
-                align-items: normal;
-            }
-        
-            .inp {
-                width: 100%;
-            }
-        
-            #q {
-                font-size: small;
-            }
-        
-        }
-    </style>
-
 </head>
 
 <body>
-    <div class="whole">
-        <div class="navbar">
-            <div class="nav-right">
-                <div class="logo">
+    <!-- Glassmorphic Header Navigation -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="{% url 'home' %}" class="logo-link">
+                <i class="fa-solid fa-book-quran"></i>
+                <span>Al-Fatwa</span>
+            </a>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="{% url 'home' %}" class="nav-item {% if request.path == '/' %}active{% endif %}">Home</a>
+                <a href="{% url 'lecture_list' %}" class="nav-item {% if 'lecture' in request.path %}active{% endif %}">Lectures</a>
+            </nav>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
 
-                    <i class="fa-solid fa-book-quran fa-2xl" style="color: #000000;"></i>
-                    <p>Al fatwa </p>
+    <!-- Main Content Area where child templates inject content -->
+    <main class="main-content">
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fa-solid fa-book-quran"></i>
+                    Al-Fatwa Islamic Teachings
                 </div>
-            </div>
-            <div class="nav-left">
-                <ul>
-                    <li><a style="color: #000000;" href="{% url 'home' %}">Home</a></li>
-                    <li><a style="color: #000000;" href="{% url 'lecture_list' %}">Lectures</a></li>
-
+                <ul class="footer-links">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'lecture_list' %}">Lectures</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
                 </ul>
             </div>
+            <div class="footer-bottom">
+                &copy; 2026 Al-Fatwa Islamic Teachings. All rights reserved.
+            </div>
         </div>
-        {% block content %}
+    </footer>
 
-
-
-        {% endblock content %}
-
-    </div> 
-
-    <!-- <p>alfatwa</p>
-    <form action="{% url 'search' %}" method="post">
-        {% csrf_token %}
-        <input type="text" name="search" id="" placeholder="search">
-        <button type="submit">Search</button>
-    </form>
-
-
-    {% if query %}
-    <li>found {{count}} result for {{query}} </li>
-    {% for lecture in lecture %}
-    <a href="{% url 'details' lecture.id %}">{{lecture.title}}</a>
-    <p>{{lecture.description}}</p>
-
-    {% endfor %}
-
-
-    {% endif %} -->
-
-
-
-   
-
-
+    <!-- Interactive Scripts -->
+    <script>
+        // Responsive Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('show')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+    </script>
 </body>
-
 </html>

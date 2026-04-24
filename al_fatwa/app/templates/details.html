@@ -1,146 +1,170 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
-
-
-
 {% block title %}
-{{lecture.title}}
-
+{{lecture.title}} - Al-Fatwa
 {% endblock title %}
-
-
 
 {% block content %}
 <style>
-    .episode_title {
-        padding: 30px 30px;
+    /* Lecture Header */
+    .lecture-header {
+        background: linear-gradient(135deg, var(--bg-card), var(--bg-main));
+        padding: 4rem 1rem;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 3rem;
+        text-align: center;
     }
 
-    
+    .lecture-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
+    .lecture-desc {
+        font-size: 1.15rem;
+        color: var(--text-secondary);
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
 
- 
-    .semi_episode {
+    /* Episodes Container */
+    .episodes-section {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .episodes-title {
+        font-size: 2rem;
+        color: var(--text-primary);
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .episodes-title i {
+        color: var(--primary);
+    }
+
+    /* Episode List Item */
+    .episode-item {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 1.5rem 2rem;
+        margin-bottom: 1rem;
         display: flex;
         justify-content: space-between;
-        margin-top: 30px;
- 
-
-
+        align-items: center;
+        transition: var(--transition);
+        box-shadow: var(--shadow-sm);
     }
 
-    .quater_episode {
+    .episode-item:hover {
+        transform: translateX(10px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--primary-light);
+    }
+
+    .episode-info {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 0.5rem;
     }
 
-    .Episode_img {
-        width: 16rem;
-        height: 152px;
+    .ep-lecture-name {
+        color: var(--primary);
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
     }
 
-    .Episode_img img {
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
-
+    .ep-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-primary);
     }
 
-    .text_listen button {
-        background-color: #4CAF50;
-        border: none;
-        border-radius: 20px;
+    .episode-item:hover .ep-title {
+        color: var(--primary);
+    }
+
+    .listen-btn {
+        flex-shrink: 0;
+        padding: 0.75rem 1.5rem;
+        border-radius: 9999px;
+        background-color: var(--primary-light);
+        color: var(--primary-hover);
+        font-weight: 600;
+        transition: var(--transition);
+        display: inline-flex;
         align-items: center;
-        justify-content: center;
-        padding: 10px;
-        width: 100px;
+        gap: 0.5rem;
     }
 
-    @media only screen and (max-width: 900px) {
-        .semi_episode {
-            display: flex;
+    .episode-item:hover .listen-btn {
+        background-color: var(--primary);
+        color: white;
+        box-shadow: 0 4px 14px rgba(5, 150, 105, 0.4);
+    }
+
+    @media (max-width: 600px) {
+        .episode-item {
             flex-direction: column;
             align-items: flex-start;
+            gap: 1.5rem;
+            padding: 1.5rem;
         }
 
-        .episode {
-            padding: 40px 19% 40px 19%;
-
-
+        .listen-btn {
+            width: 100%;
+            justify-content: center;
         }
-
-        .text_listen button {
-            margin-top: 20px;
-        }
-
-    
     }
 </style>
 
-
-
-
-<div class="first_body">
-    <!-- <div class="bod">
-        <h1>Welcome to Islamic Teachings</h1>
-        <p> Grow in your faith with teachings from top Muslim scholars. Explore our library of thousands of
-            lessons and Q&amp;A episodes
-        </p>
-
-        <div class="inp">
-            <button id="search">                    <i class="fa-solid fa-magnifying-glass fa-2xl" style="color: #000000;"></i>
-            </button>
-            <input type="text" id="q" placeholder="search for a lecture">
-            <button id="sub">Submit</button>
-        </div>
-
-    </div> -->
-    <div class="episode_title">
-        <h2 style="text-align: center;">{{lecture.title}}</h2>
-        <h3 style="text-align: center;">{{lecture.description}}</h3>
-
-
+<div class="lecture-header">
+    <div class="container">
+        <h1 class="lecture-title">{{lecture.title}}</h1>
+        <p class="lecture-desc">{{lecture.description}}</p>
     </div>
-
-    <div class="episode">
-        <h1>Episodes</h1>
-        {% for episodes in episodes %}
-
-        <div class="semi_episode">
-            <div class="quater_episode">
-                <div class="text_mini">
-                    <p style="color:#4CAF50 ;">{{episodes.lecture.title}}</p>
-                    <h3>{{episodes.title}}</h3>
-    
-                </div>
-                <!-- <div class="text_listen">
-                    <button> <a  style="color: black;" href="{% url 'episode' episodes.id %}">listen now</a></button>
-    
-                </div>
-              -->
-            </div>
-            <div class="text_listen">
-                <button> <a  style="color: black;" href="{% url 'episode' episodes.id %}">listen now</a></button>
-
-            </div>
-         
-            <!-- <div class="Episode_img">
-                <img src="{% static 'img/bc807b5d-dd43-453a-891c-189497072254.png' %}" alt="">
-    
-            </div> -->
-
-        </div>
-
-        <hr style="margin-top: 20px;">
-        {% endfor %}
-        
-    
-    </div>
-
 </div>
 
+<div class="container">
+    <div class="episodes-section">
+        <h2 class="episodes-title">
+            <i class="fa-solid fa-layer-group"></i> Episodes
+        </h2>
+
+        <div class="episodes-list">
+            {% for episodes in episodes %}
+            <div class="episode-item">
+                <div class="episode-info">
+                    <span class="ep-lecture-name">{{episodes.lecture.title}}</span>
+                    <h3 class="ep-title">{{episodes.title}}</h3>
+                </div>
+                <a href="{% url 'episode' episodes.id %}" class="listen-btn">
+                    <i class="fa-solid fa-play"></i> Listen Now
+                </a>
+            </div>
+            {% empty %}
+            <div
+                style="text-align: center; padding: 3rem; background: var(--bg-card); border-radius: 16px; border: 1px dashed var(--border-color);">
+                <i class="fa-solid fa-headphones"
+                    style="font-size: 2.5rem; color: var(--text-muted); margin-bottom: 1rem;"></i>
+                <p style="color: var(--text-secondary); font-size: 1.1rem;">No episodes available for this lecture yet.
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 
 {% endblock content %}
