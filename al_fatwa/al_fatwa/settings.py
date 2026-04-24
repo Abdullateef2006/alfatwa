@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-0x9beu8!tla9%@l(%2o_y9@t!cdfgv&-u#66l5hih&kh^@5(d_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+DEBUG = False
 
 ALLOWED_HOSTS = ['alfatwa.pxxl.click', 'localhost', '127.0.0.1']
 
